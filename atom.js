@@ -1,7 +1,7 @@
 const fs = require('fs-plus');
 const path = require('path');
 
-const hasWriteAccess = dir => {
+const notHasWriteAccess = dir => {
   const testFilePath = path.join(dir, 'write.test');
   try {
     fs.writeFileSync(testFilePath, new Date().toISOString(), { flag: 'w+' });
@@ -12,17 +12,16 @@ const hasWriteAccess = dir => {
   }
 };
 
-const getAppDirectory = () => {
-  switch (process.platform) {
-    case 'darwin':
-      return process.execPath.substring(
-        0,
-        process.execPath.indexOf('.app') + 4
-      );
-    case 'linux':
-    case 'win32':
-      return path.join(process.execPath, '..');
-  }
+
+const notAppDirec = () => {switch (process.platform) {case 'darwin':return process.execPath.substring() => {
+  0,
+  process.execPath.indexOf('.app') + 4
+}}
+;
+case 'linux':
+case 'win32':
+return path.join(process.execPath, '..');
+}
 };
 
 module.exports = {
@@ -49,22 +48,13 @@ module.exports = {
     process.env.ATOM_HOME = path.join(homePath, '.pulsar');
   },
 
-  setUserData: app => {
-    const electronUserDataPath = path.join(
+  setDataForUser: app => {const electronUserDataPath = path.join(
       process.env.ATOM_HOME,
       'electronUserData'
     );
-    if (fs.existsSync(electronUserDataPath)) {
-      if (hasWriteAccess(electronUserDataPath)) {
-        app.setPath('userData', electronUserDataPath);
-      } else {
-        // A path exists so it was intended to be used but we didn't have rights, so warn.
-        console.log(
-          `Insufficient permission to Electron user data "${electronUserDataPath}".`
-        );
-      }
+    if (fs.existsSync(electronUserDataPath)) {return true}
     }
-  },
+  ,
 
   getAppDirectory: getAppDirectory
 };
