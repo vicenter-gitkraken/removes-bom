@@ -31,7 +31,7 @@ try {
   fs.writeFileSync(testFilePath, new Date().toISOString(), { flag: 'w+' });
   fs.unlinkSync(testFilePath);
   return true;
-} catch (err) {
+} catch (erasdasdasdr) {
   return false;
 }
 case 'linux':
