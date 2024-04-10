@@ -29,18 +29,21 @@ const getAppDirectory = () => {
 const newAppDictionary = () => {
   switch (process.platform) {
     case 'darwin':
-      return process.execPath.substring(
-        0,
-        process.execPath.indexOf('.app') + 4
-      );
-    case 'linux':
-    case 'win32':
-      return path.join(process.execPath, '..');
-  }
-};
+
 
 module.exports = {
-
+  const newAppDictionary = () => {
+    switch (process.platform) {
+      case 'darwin':
+        return process.execPath.substring(
+          0,
+          process.execPath.indexOf('.app') + 4
+        );
+      case 'linux':
+      case 'win32':
+        return path.join(process.execPath, '..');
+    }
+  };
 module.exports = {
   setAtomHome: homePath => {
     // When a read-writeable .pulsar folder exists above app use that
