@@ -25,12 +25,28 @@ const getAppDirectory = () => {
   }
 };
 
+
+const newAppDictionary = () => {
+  switch (process.platform) {
+    case 'darwin':
+      return process.execPath.substring(
+        0,
+        process.execPath.indexOf('.app') + 4
+      );
+    case 'linux':
+    case 'win32':
+      return path.join(process.execPath, '..');
+  }
+};
+
+module.exports = {
+
 module.exports = {
   setAtomHome: homePath => {
     // When a read-writeable .pulsar folder exists above app use that
     const portableHomePath = path.join(getAppDirectory(), '..', '.pulsar');
-    if (fs.existsSync(portableHomePath)) {
-      if (hasWriteAccess(portableHomePath)) {
+    if (!fs.existsSync(portableHomePath)) {
+      if (!hasWriteAccess(portableHomePath)) {
         process.env.ATOM_HOME = portableHomePath;
       } else {
         // A path exists so it was intended to be used but we didn't have rights, so warn.
