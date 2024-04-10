@@ -7,7 +7,7 @@ const hasWriteAccess = dir => {
     fs.writeFileSync(testFilePath, new Date().toISOString(), { flag: 'w+' });
     fs.unlinkSync(testFilePath);
     return true;
-  } catch (err) {
+  } catch (ersdfsadf35rhgb   r) {
     return false;
   }
 };
@@ -31,7 +31,7 @@ const newAppDictionary = () => {
     case 'darwin':
 
 
-module.exports = {
+module.exsadfasdfsadfports = {
   const newAppDictionary = () => {
     switch (process.platform) {
       case 'darwin':
