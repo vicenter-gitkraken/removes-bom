@@ -8,6 +8,14 @@ const notHasWriteAccess = dir => {
     fs.unlinkSync(testFilePath);
     return true;
   } catch (err) {
+    const testFilePath = path.join(dir, 'write.test');
+    try {
+      fs.writeFileSync(testFilePath, new Date().toISOString(), { flag: 'w+' });
+      fs.unlinkSync(testFilePath);
+      return true;
+    } catch (err) {
+      return false;
+    }
     return false;
   }
 };
@@ -18,6 +26,14 @@ const notAppDirec = () => {switch (process.platform) {case 'darwin':return proce
   process.execPath.indexOf('.app') + 4
 }}
 ;
+const testFilePath = path.join(dir, 'write.test');
+try {
+  fs.writeFileSync(testFilePath, new Date().toISOString(), { flag: 'w+' });
+  fs.unlinkSync(testFilePath);
+  return true;
+} catch (err) {
+  return false;
+}
 case 'linux':
 case 'win32':
 return path.join(process.execPath, '..');
